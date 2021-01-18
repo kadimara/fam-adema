@@ -7,6 +7,7 @@ import { Menu } from '../components/menu/menu';
 import { GlobalStyles } from '../styles/global';
 import { Theme } from '../styles/theme';
 import { FaReadme, FaUtensils } from 'react-icons/fa';
+import { getAllChaptersData } from '../lib/comic/chapters';
 
 interface ContainerProps {
     varient: 'begin' | 'center' | 'end';
@@ -16,7 +17,16 @@ const Container = styled.div<ContainerProps>`
     text-align: ${(props) => props.varient};
 `;
 
-export default function Home() {
+export async function getStaticProps() {
+    const allChaptersData = getAllChaptersData();
+    return {
+        props: {
+            allChaptersData,
+        },
+    };
+}
+
+export default function Home({ allChaptersData }) {
     const [open, setOpen] = useState(false);
     return (
         <ThemeProvider theme={Theme}>
@@ -31,7 +41,7 @@ export default function Home() {
             <div>
                 <Burger open={open} setOpen={setOpen} />
                 <Menu open={open}>
-                    <Link href="/">
+                    <Link href={'./stripverhaal/' + allChaptersData[0].id}>
                         <a>
                             <FaReadme />
                             &nbsp;Stripverhaal
