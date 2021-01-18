@@ -1,13 +1,18 @@
-import "styled-components";
+import 'styled-components';
 
-// and extend them!
-declare module "styled-components" {
+declare module 'styled-components' {
     export interface DefaultTheme {
         borderRadius: string;
 
+        // https://www.smashingmagazine.com/2016/04/web-developer-guide-color/
+        // Hoe kies je een kleur
+        // TODO naar nextjs-app-empty kopieren
         colors: {
             main: string;
             secondary: string;
+            white: string;
+            light: string;
+            dark: string;
         };
     }
 }
