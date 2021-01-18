@@ -11,6 +11,7 @@ import {
     getChapterData,
 } from '../../lib/comic/chapters';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function chapter({ chapterData, allChaptersData }) {
     const [open, setOpen] = useState(false);
@@ -36,6 +37,7 @@ export default function chapter({ chapterData, allChaptersData }) {
                         );
                     })}
                 </Menu>
+                <img src="" />
             </div>
         </ThemeProvider>
     );
