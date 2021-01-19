@@ -1,3 +1,3 @@
 ---
-url: 'images/chapter1'
+url: "/comic/koffie_op_de_muur.png"
 ---

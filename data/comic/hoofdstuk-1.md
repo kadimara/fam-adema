@@ -1,3 +1,3 @@
 ---
-url: 'images/chapter1'
+url: "/comic/test.jpg"
 ---
