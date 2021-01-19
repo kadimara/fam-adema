@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-interface LinkStyledProps {
+interface MenuItemStyledProps {
     active?: boolean;
 }
 
-export const LinkStyled = styled.a<LinkStyledProps>`
+export const MenuItemStyled = styled.a<MenuItemStyledProps>`
     font-size: 24px;
     text-transform: uppercase;
-    margin: 16px;
+    margin: 8px 16px;
     font-weight: bold;
     letter-spacing: 2px;
     color: ${({ theme }) => theme.colors.white};

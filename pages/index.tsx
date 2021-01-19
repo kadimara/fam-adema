@@ -1,15 +1,14 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { Burger } from "../components/burger/burger";
 import { Menu } from "../components/menu/menu";
 import { GlobalStyles } from "../styles/global";
-import { Theme } from "../styles/theme";
 import { FaReadme, FaUtensils } from "react-icons/fa";
 import { getAllChaptersData } from "../lib/comic/chapters";
 import { ComicTheme } from "../styles/comic-theme";
-import { LinkStyled } from "../components/menu/link.styled";
+import { MenuItemStyled } from "../components/menu/menuitem.styled";
 
 interface ContainerProps {
     varient: "begin" | "center" | "end";
@@ -43,17 +42,17 @@ export default function Home({ allChaptersData }) {
             <div>
                 <Burger open={open} setOpen={setOpen} />
                 <Menu open={open}>
-                    <Link href={"./stripverhaal/" + allChaptersData[0].id}>
-                        <LinkStyled>
+                    <Link href={"./hersenkraker/" + allChaptersData[0].id}>
+                        <MenuItemStyled>
                             <FaReadme />
-                            &nbsp;Stripverhaal
-                        </LinkStyled>
+                            &nbsp;Hersenkraker
+                        </MenuItemStyled>
                     </Link>
                     <Link href='/'>
-                        <LinkStyled>
+                        <MenuItemStyled>
                             <FaUtensils />
                             &nbsp;Recepten
-                        </LinkStyled>
+                        </MenuItemStyled>
                     </Link>
                 </Menu>
             </div>

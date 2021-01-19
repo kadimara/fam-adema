@@ -4,16 +4,14 @@ import styled, { ThemeProvider } from "styled-components";
 import { Burger } from "../../components/burger/burger";
 import { Menu } from "../../components/menu/menu";
 import { GlobalStyles } from "../../styles/global";
-import { Theme } from "../../styles/theme";
 import {
     getAllChapterIds,
     getAllChaptersData,
     getChapterData,
 } from "../../lib/comic/chapters";
 import Link from "next/link";
-import Image from "next/image";
 import { ComicTheme } from "../../styles/comic-theme";
-import { LinkStyled } from "../../components/menu/link.styled";
+import { MenuItemStyled } from "../../components/menu/menuitem.styled";
 import { FaArrowRight } from "react-icons/fa";
 
 const ChapterContainer = styled.div`
@@ -75,14 +73,14 @@ export default function chapter({ chapterData, allChaptersData }) {
                         return (
                             <Link
                                 key={chapter.id}
-                                href={"/stripverhaal/" + chapter.id}
+                                href={"/hersenkraker/" + chapter.id}
                             >
-                                <LinkStyled
+                                <MenuItemStyled
                                     active={chapter.id == chapterData.id}
                                     onClick={() => setOpen(false)}
                                 >
-                                    {"Hoodstuk " + chapter.id}
-                                </LinkStyled>
+                                    {chapter.id.replace("-", " ")}
+                                </MenuItemStyled>
                             </Link>
                         );
                     })}
