@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { ComicTheme } from "../../styles/comic-theme";
+import { LinkStyled } from "../../components/menu/link.styled";
 
 const ChapterContainer = styled.div`
     margin: auto;
@@ -62,9 +63,12 @@ export default function chapter({ chapterData, allChaptersData }) {
                                 key={chapter.id}
                                 href={"/stripverhaal/" + chapter.id}
                             >
-                                <a onClick={() => setOpen(false)}>
+                                <LinkStyled
+                                    active={chapter.id == chapterData.id}
+                                    onClick={() => setOpen(false)}
+                                >
                                     {chapter.id}
-                                </a>
+                                </LinkStyled>
                             </Link>
                         );
                     })}

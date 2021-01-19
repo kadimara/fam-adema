@@ -5,7 +5,7 @@ export const ComicTheme: DefaultTheme = {
 
     colors: {
         main: "#c1854f",
-        secondary: "#0b4aac",
+        secondary: "#90b2e6",
         white: "#fff",
         light: "#a7c3ec",
         dark: "#353a45",

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface StyledMenuProps {
     open: boolean;
@@ -6,10 +6,10 @@ interface StyledMenuProps {
 
 export const StyledMenu = styled.nav<StyledMenuProps>`
     transform: ${(props) =>
-        props.open ? 'translateX(0)' : 'translateX(-100%)'};
+        props.open ? "translateX(0)" : "translateX(-100%)"};
     display: flex;
     flex-direction: column;
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.main};
     height: 100vh;
     align-items: flex-start;
     position: absolute;
@@ -18,19 +18,5 @@ export const StyledMenu = styled.nav<StyledMenuProps>`
     transition: transform 0.3s ease-in-out;
     padding-top: 64px;
 
-    a {
-        font-size: 24px;
-        text-transform: uppercase;
-        margin: 16px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        color: ${({ theme }) => theme.colors.dark};
-        text-decoration: none;
-        transition: color 0.3s linear;
-        border-bottom: 4px solid transparent;
-
-        &:hover {
-            border-color: ${({ theme }) => theme.colors.main};
-        }
-    }
+    ${(props) => (props.open ? "box-shadow: 0px 0px 10px #3c3c3c" : "")};
 `;
