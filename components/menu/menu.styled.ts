@@ -12,11 +12,13 @@ export const StyledMenu = styled.nav<StyledMenuProps>`
     background: ${({ theme }) => theme.colors.main};
     height: 100vh;
     align-items: flex-start;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     transition: transform 0.3s ease-in-out;
     padding-top: 64px;
+    overflow: auto;
+    white-space: nowrap;
 
     ${(props) => (props.open ? "box-shadow: 0px 0px 10px #3c3c3c" : "")};
 `;

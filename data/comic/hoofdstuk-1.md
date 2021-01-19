@@ -1,3 +1,0 @@
----
-url: "/comic/test.jpg"
----

@@ -52,7 +52,7 @@ export default function chapter({ chapterData, allChaptersData }) {
         <ThemeProvider theme={ComicTheme}>
             <GlobalStyles />
             <Head>
-                <title>Family Adema</title>
+                <title>Stripverhaal door Annabel</title>
             </Head>
             <div>
                 <Burger open={open} setOpen={setOpen} />
@@ -67,16 +67,17 @@ export default function chapter({ chapterData, allChaptersData }) {
                                     active={chapter.id == chapterData.id}
                                     onClick={() => setOpen(false)}
                                 >
-                                    {chapter.id}
+                                    {"Hoodstuk " + chapter.id}
                                 </LinkStyled>
                             </Link>
                         );
                     })}
                 </Menu>
-                <ChapterContainer>
-                    <ChapterImage src={chapterData.url} />
-                </ChapterContainer>
             </div>
+            <ChapterContainer>
+                <ChapterImage src={chapterData.url} />
+                {chapterData.url2 && <ChapterImage src={chapterData.url2} />}
+            </ChapterContainer>
         </ThemeProvider>
     );
 }

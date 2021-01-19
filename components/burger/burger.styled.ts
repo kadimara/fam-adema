@@ -5,7 +5,7 @@ interface StyledBurgerProps {
 }
 
 export const StyledBurger = styled.button<StyledBurgerProps>`
-    position: absolute;
+    position: fixed;
     top: 16px;
     left: 16px;
     display: flex;
