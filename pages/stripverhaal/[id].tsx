@@ -14,6 +14,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ComicTheme } from "../../styles/comic-theme";
 import { LinkStyled } from "../../components/menu/link.styled";
+import { FaArrowRight } from "react-icons/fa";
 
 const ChapterContainer = styled.div`
     margin: auto;
@@ -46,8 +47,21 @@ const ChapterImage = styled.img`
     width: 100%;
 `;
 
+const FaArrowRightStyled = styled(FaArrowRight)`
+    color: ${(props) => props.theme.colors.main};
+    position: fixed;
+    font-size: 48px;
+    bottom: 32px;
+    right: 32px;
+    cursor: pointer;
+`;
+
 export default function chapter({ chapterData, allChaptersData }) {
     const [open, setOpen] = useState(false);
+    const idNumber = parseInt(chapterData.id);
+    const hasNext = idNumber < allChaptersData.length;
+    const nextId = idNumber + 1;
+
     return (
         <ThemeProvider theme={ComicTheme}>
             <GlobalStyles />
@@ -78,6 +92,11 @@ export default function chapter({ chapterData, allChaptersData }) {
                 <ChapterImage src={chapterData.url} />
                 {chapterData.url2 && <ChapterImage src={chapterData.url2} />}
             </ChapterContainer>
+            {hasNext && (
+                <Link href={"/stripverhaal/" + nextId}>
+                    <FaArrowRightStyled />
+                </Link>
+            )}
         </ThemeProvider>
     );
 }
