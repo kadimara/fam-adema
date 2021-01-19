@@ -45,7 +45,7 @@ const ChapterImage = styled.img`
     width: 100%;
 `;
 
-const FaArrowRightStyled = styled(FaArrowRight)`
+const StyledIcon = styled.div`
     color: ${(props) => props.theme.colors.main};
     position: fixed;
     font-size: 48px;
@@ -56,10 +56,11 @@ const FaArrowRightStyled = styled(FaArrowRight)`
 
 export default function chapter({ chapterData, allChaptersData }) {
     const [open, setOpen] = useState(false);
-    const idNumber = parseInt(chapterData.id);
-    const hasNext = idNumber < allChaptersData.length;
-    const nextId = idNumber + 1;
-
+    const currentIndex = allChaptersData.findIndex(
+        (data) => data.id == chapterData.id
+    );
+    const hasNext = currentIndex < allChaptersData.length - 1;
+    const nextIndex = currentIndex + 1;
     return (
         <ThemeProvider theme={ComicTheme}>
             <GlobalStyles />
@@ -91,8 +92,10 @@ export default function chapter({ chapterData, allChaptersData }) {
                 {chapterData.url2 && <ChapterImage src={chapterData.url2} />}
             </ChapterContainer>
             {hasNext && (
-                <Link href={"/stripverhaal/" + nextId}>
-                    <FaArrowRightStyled />
+                <Link href={"/hersenkraker/" + allChaptersData[nextIndex].id}>
+                    <StyledIcon>
+                        <FaArrowRight />
+                    </StyledIcon>
                 </Link>
             )}
         </ThemeProvider>

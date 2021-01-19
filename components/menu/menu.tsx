@@ -8,14 +8,14 @@ interface MenuProps {
     open: boolean;
 }
 
-const Scrollable = styled.div`
+const MenuScrollable = styled.div`
     flex-direction: column;
     display: flex;
     overflow: auto;
     padding: 16px 0px;
 `;
 
-const Header = styled.div`
+const MenuHeader = styled.div`
     min-height: 60px;
     display: flex;
     align-items: center;
@@ -25,7 +25,7 @@ const Header = styled.div`
     border-bottom: 4px solid ${(props) => props.theme.colors.secondary};
 `;
 
-const Home = styled(FaHome)`
+const StyledIcon = styled.div`
     font-size: 32px;
     color: ${(props) => props.theme.colors.white};
     margin-right: 16px;
@@ -36,12 +36,14 @@ const Home = styled(FaHome)`
 export const Menu: React.FC<MenuProps> = ({ open, ...props }) => {
     return (
         <StyledMenu open={open}>
-            <Header>
+            <MenuHeader>
                 <Link href={"/"}>
-                    <Home />
+                    <StyledIcon>
+                        <FaHome />
+                    </StyledIcon>
                 </Link>
-            </Header>
-            <Scrollable>{props.children}</Scrollable>
+            </MenuHeader>
+            <MenuScrollable>{props.children}</MenuScrollable>
         </StyledMenu>
     );
 };
