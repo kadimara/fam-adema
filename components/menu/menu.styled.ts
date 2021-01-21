@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface StyledMenuProps {
     open: boolean;
@@ -6,17 +6,22 @@ interface StyledMenuProps {
 
 export const StyledMenu = styled.nav<StyledMenuProps>`
     transform: ${(props) =>
-        props.open ? "translateX(0)" : "translateX(-100%)"};
+        props.open ? 'translateX(0)' : 'translateX(-100%)'};
     display: flex;
     flex-direction: column;
     background: ${({ theme }) => theme.colors.main};
     height: 100vh;
-    align-items: flex-start;
     position: fixed;
     top: 0;
     left: 0;
     transition: transform 0.3s ease-in-out;
     white-space: nowrap;
+    padding-top: 64px;
 
-    ${(props) => (props.open ? "box-shadow: 0px 0px 10px #3c3c3c" : "")};
+    ${(props) => (props.open ? 'box-shadow: 0px 0px 10px #3c3c3c' : '')};
+
+    @media (max-width: 575.98px) {
+        width: 100%;
+        text-align: center;
+    }
 `;

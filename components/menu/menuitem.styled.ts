@@ -1,25 +1,24 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface MenuItemStyledProps {
     active?: boolean;
 }
 
 export const MenuItemStyled = styled.a<MenuItemStyledProps>`
-    font-size: 24px;
-    text-transform: uppercase;
-    margin: 8px 16px;
+    width: 100%;
+    font-size: 20px;
+    text-transform: capitalize;
+    padding: 8px 24px;
     font-weight: bold;
     letter-spacing: 2px;
     color: ${({ theme }) => theme.colors.white};
     text-decoration: none;
     transition: color 0.3s linear;
-    border-bottom: 4px solid;
     cursor: pointer;
 
-    border-color: ${(props) =>
-        props.active ? props.theme.colors.secondary : "transparent"};
+    background-color: ${(props) => props.active && 'rgba(255, 255, 255, 0.2)'};
 
     &:hover {
-        border-color: ${({ theme }) => theme.colors.secondary};
+        background-color: rgba(255, 255, 255, 0.2);
     }
 `;
