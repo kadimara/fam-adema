@@ -1,10 +1,12 @@
-import React, { useRef } from "react";
-import { useRouter } from "next/router";
-import { redirectToHome } from "../lib/serversideprops";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import { ComicTheme } from "../styles/comic-theme";
-import { GlobalStyles } from "../styles/global";
-import Head from "next/head";
+import React, { useRef } from 'react';
+import { useRouter } from 'next/router';
+import { redirectToHome } from '../lib/serversideprops';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ComicTheme } from '../styles/comic-theme';
+import { GlobalStyles } from '../styles/global';
+import Head from 'next/head';
+import { FaReadme } from 'react-icons/fa';
+import Link from 'next/link';
 
 const LoginStyles = createGlobalStyle`
   body {
@@ -38,6 +40,7 @@ const FormInput = styled.input`
     padding: 4px 16px;
     width: 150px;
     border: none;
+    text-align: center;
 
     &:focus {
         outline: none;
@@ -62,6 +65,20 @@ const SubmitButton = styled.button`
     }
 `;
 
+const LinkStyled = styled.a`
+    color: ${(props) => props.theme.colors.secondary};
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
 export default function SignInPage() {
     const router = useRouter();
     const passwordInput = useRef(null);
@@ -71,14 +88,14 @@ export default function SignInPage() {
 
         const password = passwordInput.current.value;
 
-        const response = await fetch("/api/session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+        const response = await fetch('/api/session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password }),
         });
 
         if (response.ok) {
-            return router.push("/");
+            return router.push('/');
         }
     };
     return (
@@ -91,9 +108,30 @@ export default function SignInPage() {
                 <GlobalStyles />
                 <LoginStyles />
                 <FormStyled onSubmit={handleSubmit}>
-                    <FormTitle>Welcome</FormTitle>
-                    <FormInput type='password' ref={passwordInput} />
-                    <SubmitButton type='submit'>Login</SubmitButton>
+                    <div>
+                        <FormTitle>Welcome</FormTitle>
+                    </div>
+                    <div>
+                        <FormInput
+                            type="password"
+                            ref={passwordInput}
+                            placeholder="Password"
+                        />
+                    </div>
+                    <div>
+                        <SubmitButton type="submit">Login</SubmitButton>
+                    </div>
+                    <div>
+                        Weet je het wachtwoord niet?
+                        <br />
+                        Je kunt altijd deze strip nog lezen:
+                    </div>
+                    <Link href="/hersenkraker">
+                        <LinkStyled>
+                            <FaReadme />
+                            &nbsp;Hersenkraker
+                        </LinkStyled>
+                    </Link>
                 </FormStyled>
             </Container>
         </ThemeProvider>
