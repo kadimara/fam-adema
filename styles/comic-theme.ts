@@ -2,6 +2,7 @@ import { DefaultTheme } from "styled-components";
 
 export const ComicTheme: DefaultTheme = {
     borderRadius: "5px",
+    borderRadiusSmall: "3px",
 
     colors: {
         main: "#c1854f",

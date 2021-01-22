@@ -33,7 +33,7 @@ const FormTitle = styled.div`
 `;
 
 const FormInput = styled.input`
-    border-radius: 3px;
+    border-radius: ${(props) => props.theme.borderRadiusSmall};
     font-size: 20px;
     padding: 4px 16px;
     width: 150px;
