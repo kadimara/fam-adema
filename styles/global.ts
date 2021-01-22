@@ -14,5 +14,6 @@ export const GlobalStyles = createGlobalStyle`
     height: 100vh;
     justify-content: center;
     text-rendering: optimizeLegibility;
+    min-width: 100%;
   }
   `;

@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "lib/comic/chapters.js"  ],
+, "lib/comic/chapters.js", "lib/login/login.js"  ],
   "exclude": [
     "node_modules"
   ]
