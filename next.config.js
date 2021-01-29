@@ -6,7 +6,7 @@ module.exports = {
         return [
             {
                 source: '/hersenkraker',
-                destination: '/hersenkraker/intro',
+                destination: '/hersenkraker/begin',
                 permanent: true,
             },
         ];

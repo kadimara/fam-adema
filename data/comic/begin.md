@@ -1,0 +1,3 @@
+---
+url: '/comic/cover.png'
+---
