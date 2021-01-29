@@ -9,32 +9,42 @@ import { FaHome, FaList, FaUtensils } from 'react-icons/fa';
 import { ComicTheme } from '../styles/comic-theme';
 import { MenuItemStyled } from '../components/menu/menuitem.styled';
 import { redirectToLogin } from '../lib/serversideprops';
+import { Recipe } from '../components/recipe/recipe';
 
-interface ContainerProps {
-    varient: 'begin' | 'center' | 'end';
-}
+interface ContainerProps {}
 
 const Container = styled.div<ContainerProps>`
-    text-align: ${(props) => props.varient};
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    margin: 64px;
 `;
 
 export default function Home() {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     return (
         <ThemeProvider theme={ComicTheme}>
             <GlobalStyles />
             <Head>
                 <title>Family Adema</title>
             </Head>
-            <Container varient="center">
+            <Container>
                 <GlobalStyles />
-                <h1>Hello, world!</h1>
+                <Recipe />
+                <Recipe />
+                <Recipe />
+                <Recipe />
+                <Recipe />
+                <Recipe />
+                <Recipe />
             </Container>
             <div>
                 <Burger open={open} setOpen={setOpen} />
                 <Menu open={open}>
                     <Link href="/">
-                        <MenuItemStyled active={true}>
+                        <MenuItemStyled>
                             <FaHome />
                             &nbsp;Home
                         </MenuItemStyled>
@@ -46,7 +56,7 @@ export default function Home() {
                         </MenuItemStyled>
                     </Link>
                     <Link href="/recepten">
-                        <MenuItemStyled>
+                        <MenuItemStyled active={true}>
                             <FaUtensils />
                             &nbsp;Recepten
                         </MenuItemStyled>

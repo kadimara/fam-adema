@@ -5,6 +5,8 @@ interface MenuItemStyledProps {
 }
 
 export const MenuItemStyled = styled.a<MenuItemStyledProps>`
+    display: flex;
+    align-items: center;
     width: 100%;
     font-size: 20px;
     text-transform: capitalize;

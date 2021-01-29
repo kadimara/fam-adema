@@ -17,6 +17,7 @@ export const StyledMenu = styled.nav<StyledMenuProps>`
     transition: transform 0.3s ease-in-out;
     white-space: nowrap;
     padding-top: 64px;
+    min-width: 200px;
 
     ${(props) => (props.open ? 'box-shadow: 0px 0px 10px #3c3c3c' : '')};
 
