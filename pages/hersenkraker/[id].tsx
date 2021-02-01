@@ -49,7 +49,7 @@ const ChapterImage = styled.img`
 
 const ChapterVideoStyled = styled.div`
     position: relative;
-    width: 100.1%;
+    width: 101%;
     cursor: pointer;
 
     & > video {
