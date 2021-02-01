@@ -16,6 +16,7 @@ import { FaArrowRight } from 'react-icons/fa';
 
 const ChapterContainer = styled.div`
     margin: auto;
+    position: relative;
     @media (max-width: 575.98px) {
         width: 100%;
     }
@@ -50,11 +51,12 @@ const ChapterVideo = styled.video`
 
 const StyledIcon = styled.div`
     color: ${(props) => props.theme.colors.main};
-    position: fixed;
     font-size: 32px;
-    bottom: 32px;
-    right: 32px;
+    line-height: 30px;
+    float: right;
     cursor: pointer;
+    padding: 16px;
+    margin-top: -16px;
 `;
 
 export default function Chapter({ chapterData, allChaptersData }) {
@@ -119,14 +121,16 @@ export default function Chapter({ chapterData, allChaptersData }) {
             <ChapterContainer>
                 {urlHtml}
                 {url2Html}
+                {hasNext && (
+                    <Link
+                        href={'/hersenkraker/' + allChaptersData[nextIndex].id}
+                    >
+                        <StyledIcon>
+                            <FaArrowRight />
+                        </StyledIcon>
+                    </Link>
+                )}
             </ChapterContainer>
-            {hasNext && (
-                <Link href={'/hersenkraker/' + allChaptersData[nextIndex].id}>
-                    <StyledIcon>
-                        <FaArrowRight />
-                    </StyledIcon>
-                </Link>
-            )}
         </ThemeProvider>
     );
 }
