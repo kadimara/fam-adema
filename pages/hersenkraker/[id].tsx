@@ -1,21 +1,22 @@
-import Head from 'next/head';
-import { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { Burger } from '../../components/burger/burger';
-import { Menu } from '../../components/menu/menu';
-import { GlobalStyles } from '../../styles/global';
+import Head from "next/head";
+import { useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
+import { Burger } from "../../components/burger/burger";
+import { Menu } from "../../components/menu/menu";
+import { GlobalStyles } from "../../styles/global";
 import {
     getAllChapterIds,
     getAllChaptersData,
     getChapterData,
-} from '../../lib/comic/chapters';
-import Link from 'next/link';
-import { ComicTheme } from '../../styles/comic-theme';
-import { MenuItemStyled } from '../../components/menu/menuitem.styled';
-import { FaArrowRight } from 'react-icons/fa';
+} from "../../lib/comic/chapters";
+import Link from "next/link";
+import { ComicTheme } from "../../styles/comic-theme";
+import { MenuItemStyled } from "../../components/menu/menuitem.styled";
+import { FaArrowRight } from "react-icons/fa";
 
 const ChapterContainer = styled.div`
     margin: auto;
+    position: relative;
     @media (max-width: 575.98px) {
         width: 100%;
     }
@@ -47,11 +48,12 @@ const ChapterImage = styled.img`
 
 const StyledIcon = styled.div`
     color: ${(props) => props.theme.colors.main};
-    position: fixed;
     font-size: 32px;
-    bottom: 32px;
-    right: 32px;
+    line-height: 30px;
+    float: right;
     cursor: pointer;
+    padding: 16px;
+    margin-top: -16px;
 `;
 
 export default function Chapter({ chapterData, allChaptersData }) {
@@ -74,13 +76,13 @@ export default function Chapter({ chapterData, allChaptersData }) {
                         return (
                             <Link
                                 key={chapter.id}
-                                href={'/hersenkraker/' + chapter.id}
+                                href={"/hersenkraker/" + chapter.id}
                             >
                                 <MenuItemStyled
                                     active={chapter.id == chapterData.id}
                                     onClick={() => setOpen(false)}
                                 >
-                                    {chapter.id.replace('-', ' ')}
+                                    {chapter.id.replace("-", " ")}
                                 </MenuItemStyled>
                             </Link>
                         );
@@ -90,14 +92,16 @@ export default function Chapter({ chapterData, allChaptersData }) {
             <ChapterContainer>
                 <ChapterImage src={chapterData.url} />
                 {chapterData.url2 && <ChapterImage src={chapterData.url2} />}
+                {hasNext && (
+                    <Link
+                        href={"/hersenkraker/" + allChaptersData[nextIndex].id}
+                    >
+                        <StyledIcon>
+                            <FaArrowRight />
+                        </StyledIcon>
+                    </Link>
+                )}
             </ChapterContainer>
-            {hasNext && (
-                <Link href={'/hersenkraker/' + allChaptersData[nextIndex].id}>
-                    <StyledIcon>
-                        <FaArrowRight />
-                    </StyledIcon>
-                </Link>
-            )}
         </ThemeProvider>
     );
 }
