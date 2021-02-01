@@ -1,20 +1,21 @@
-import Head from 'next/head';
-import { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { Burger } from '../../components/burger/burger';
-import { Menu } from '../../components/menu/menu';
-import { GlobalStyles } from '../../styles/global';
+import Head from "next/head";
+import { useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
+import { Burger } from "../../components/burger/burger";
+import { Menu } from "../../components/menu/menu";
+import { GlobalStyles } from "../../styles/global";
 import {
     getAllChapterIds,
     getAllChaptersData,
     getChapterData,
-} from '../../lib/comic/chapters';
-import Link from 'next/link';
-import { ComicTheme } from '../../styles/comic-theme';
-import { MenuItemStyled } from '../../components/menu/menuitem.styled';
-import { FaArrowRight } from 'react-icons/fa';
+} from "../../lib/comic/chapters";
+import Link from "next/link";
+import { ComicTheme } from "../../styles/comic-theme";
+import { MenuItemStyled } from "../../components/menu/menuitem.styled";
+import { FaArrowRight, FaPlay } from "react-icons/fa";
 
 const ChapterContainer = styled.div`
+    overflow: hidden;
     margin: auto;
     position: relative;
     @media (max-width: 575.98px) {
@@ -45,11 +46,54 @@ const ChapterContainer = styled.div`
 const ChapterImage = styled.img`
     width: 100%;
 `;
-const ChapterVideo = styled.video`
+
+const ChapterVideoStyled = styled.div`
+    position: relative;
     width: 100%;
+    cursor: pointer;
+
+    & > video {
+        width: 100%;
+    }
 `;
 
-const StyledIcon = styled.div`
+const ChapterVideo = ({ url }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    return (
+        <ChapterVideoStyled>
+            <video
+                onClick={(event) => {
+                    event.currentTarget.play();
+                    setIsPlaying(true);
+                }}
+                onPause={() => setIsPlaying(false)}
+            >
+                <source src={url} type='video/mp4' />
+            </video>
+            {isPlaying == false && (
+                <PlayIcon>
+                    play &nbsp;
+                    <FaPlay />
+                </PlayIcon>
+            )}
+        </ChapterVideoStyled>
+    );
+};
+
+const PlayIcon = styled.div`
+    color: ${(props) => props.theme.colors.white};
+    font-size: 32px;
+    line-height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    display: flex;
+    font-weight: bold;
+`;
+
+const NextIcon = styled.div`
     color: ${(props) => props.theme.colors.main};
     font-size: 32px;
     line-height: 30px;
@@ -61,6 +105,7 @@ const StyledIcon = styled.div`
 
 export default function Chapter({ chapterData, allChaptersData }) {
     const [open, setOpen] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
     const currentIndex = allChaptersData.findIndex(
         (data) => data.id == chapterData.id
     );
@@ -68,28 +113,18 @@ export default function Chapter({ chapterData, allChaptersData }) {
     const nextIndex = currentIndex + 1;
 
     let urlHtml = <ChapterImage src={chapterData.url} />;
-    const hasUrlVideo = chapterData.url.includes('.mp4');
+    const hasUrlVideo = chapterData.url.includes(".mp4");
     if (hasUrlVideo) {
-        urlHtml = (
-            <ChapterVideo controls>
-                <source src={chapterData.url} type="video/mp4" />
-            </ChapterVideo>
-        );
+        urlHtml = <ChapterVideo url={chapterData.url} />;
     }
 
     let url2Html = null;
     if (chapterData.url2) {
         url2Html = <ChapterImage src={chapterData.url2} />;
-        const hasUrl2Video = chapterData.url2.includes('.mp4');
+        const hasUrl2Video = chapterData.url2.includes(".mp4");
         if (hasUrl2Video) {
-            url2Html = (
-                <ChapterVideo controls>
-                    <source src={chapterData.url2} type="video/mp4" />
-                </ChapterVideo>
-            );
+            url2Html = <ChapterVideo url={chapterData.url2} />;
         }
-
-        console.log(hasUrlVideo, hasUrl2Video);
     }
 
     return (
@@ -105,13 +140,13 @@ export default function Chapter({ chapterData, allChaptersData }) {
                         return (
                             <Link
                                 key={chapter.id}
-                                href={'/hersenkraker/' + chapter.id}
+                                href={"/hersenkraker/" + chapter.id}
                             >
                                 <MenuItemStyled
                                     active={chapter.id == chapterData.id}
                                     onClick={() => setOpen(false)}
                                 >
-                                    {chapter.id.replace('-', ' ')}
+                                    {chapter.id.replace("-", " ")}
                                 </MenuItemStyled>
                             </Link>
                         );
@@ -123,11 +158,11 @@ export default function Chapter({ chapterData, allChaptersData }) {
                 {url2Html}
                 {hasNext && (
                     <Link
-                        href={'/hersenkraker/' + allChaptersData[nextIndex].id}
+                        href={"/hersenkraker/" + allChaptersData[nextIndex].id}
                     >
-                        <StyledIcon>
+                        <NextIcon>
                             <FaArrowRight />
-                        </StyledIcon>
+                        </NextIcon>
                     </Link>
                 )}
             </ChapterContainer>
