@@ -44,6 +44,9 @@ const ChapterContainer = styled.div`
 const ChapterImage = styled.img`
     width: 100%;
 `;
+const ChapterVideo = styled.video`
+    width: 100%;
+`;
 
 const StyledIcon = styled.div`
     color: ${(props) => props.theme.colors.main};
@@ -61,6 +64,32 @@ export default function Chapter({ chapterData, allChaptersData }) {
     );
     const hasNext = currentIndex < allChaptersData.length - 1;
     const nextIndex = currentIndex + 1;
+
+    let urlHtml = <ChapterImage src={chapterData.url} />;
+    const hasUrlVideo = chapterData.url.includes('.mp4');
+    if (hasUrlVideo) {
+        urlHtml = (
+            <ChapterVideo controls>
+                <source src={chapterData.url} type="video/mp4" />
+            </ChapterVideo>
+        );
+    }
+
+    let url2Html = null;
+    if (chapterData.url2) {
+        url2Html = <ChapterImage src={chapterData.url2} />;
+        const hasUrl2Video = chapterData.url2.includes('.mp4');
+        if (hasUrl2Video) {
+            url2Html = (
+                <ChapterVideo controls>
+                    <source src={chapterData.url2} type="video/mp4" />
+                </ChapterVideo>
+            );
+        }
+
+        console.log(hasUrlVideo, hasUrl2Video);
+    }
+
     return (
         <ThemeProvider theme={ComicTheme}>
             <GlobalStyles />
@@ -88,8 +117,8 @@ export default function Chapter({ chapterData, allChaptersData }) {
                 </Menu>
             </div>
             <ChapterContainer>
-                <ChapterImage src={chapterData.url} />
-                {chapterData.url2 && <ChapterImage src={chapterData.url2} />}
+                {urlHtml}
+                {url2Html}
             </ChapterContainer>
             {hasNext && (
                 <Link href={'/hersenkraker/' + allChaptersData[nextIndex].id}>
