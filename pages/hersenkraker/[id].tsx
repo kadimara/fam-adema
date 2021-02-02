@@ -15,8 +15,11 @@ import { MenuItemStyled } from "../../components/menu/menuitem.styled";
 import { FaArrowRight, FaPlay } from "react-icons/fa";
 
 const ChapterContainer = styled.div`
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
     margin: auto;
+    padding-top: 48px;
     position: relative;
     @media (max-width: 575.98px) {
         width: 100%;
