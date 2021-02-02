@@ -19,25 +19,26 @@ const ChapterContainer = styled.div`
     overflow-y: auto;
     height: 100%;
     margin: auto;
-    padding-top: 48px;
     position: relative;
+    padding-top: 48px !important;
+
     @media (max-width: 575.98px) {
-        width: 100%;
+        padding: 0;
     }
 
     // Small devices (landscape phones, 576px and up)
     @media (min-width: 576px) and (max-width: 767.98px) {
-        margin: 0px 64px;
+        padding: 0px 64px;
     }
 
     // Medium devices (tablets, 768px and up)
     @media (min-width: 768px) and (max-width: 991.98px) {
-        width: 70%;
+        padding: 0 15%;
     }
 
     // Large devices (desktops, 992px and up)
     @media (min-width: 992px) {
-        width: 60%;
+        padding: 0 20%;
     }
 
     /* // Extra large devices (large desktops, 1200px and up)
