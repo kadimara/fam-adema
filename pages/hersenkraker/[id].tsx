@@ -72,7 +72,6 @@ const ChapterVideo = ({ url }) => {
             </video>
             {isPlaying == false && (
                 <PlayIcon>
-                    play &nbsp;
                     <FaPlay />
                 </PlayIcon>
             )}
