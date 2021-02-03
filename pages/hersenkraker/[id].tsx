@@ -161,7 +161,6 @@ export default function Chapter({ chapterData, allChaptersData }) {
             <ChapterContainer
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                onLoad={(e) => e.currentTarget.scrollTo(0, 0)}
             >
                 {urlHtml}
                 {url2Html}
