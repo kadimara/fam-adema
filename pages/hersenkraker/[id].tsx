@@ -13,8 +13,10 @@ import Link from "next/link";
 import { ComicTheme } from "../../styles/comic-theme";
 import { MenuItemStyled } from "../../components/menu/menuitem.styled";
 import { FaArrowRight, FaPlay } from "react-icons/fa";
+import { motion } from "framer-motion";
 
-const ChapterContainer = styled.div`
+const ChapterContainer = styled(motion.div)`
+    opacity: 0;
     overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
@@ -156,12 +158,17 @@ export default function Chapter({ chapterData, allChaptersData }) {
                     })}
                 </Menu>
             </div>
-            <ChapterContainer onLoad={(e) => e.currentTarget.scrollTo(0, 0)}>
+            <ChapterContainer
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                onLoad={(e) => e.currentTarget.scrollTo(0, 0)}
+            >
                 {urlHtml}
                 {url2Html}
                 {hasNext && (
                     <Link
                         href={"/hersenkraker/" + allChaptersData[nextIndex].id}
+                        replace={true}
                     >
                         <NextIcon>
                             <FaArrowRight />
@@ -188,6 +195,7 @@ export async function getStaticProps({ params }) {
         props: {
             chapterData,
             allChaptersData,
+            key: params.id,
         },
     };
 }

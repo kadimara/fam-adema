@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.7",
+    "framer-motion": "^3.3.0",
     "gray-matter": "^4.0.2",
     "next": "10.0.5",
     "next-iron-session": "^4.1.10",
