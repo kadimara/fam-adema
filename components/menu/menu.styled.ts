@@ -5,12 +5,13 @@ interface StyledMenuProps {
 }
 
 export const StyledMenu = styled.nav<StyledMenuProps>`
+    overflow: auto;
     transform: ${(props) =>
         props.open ? "translateX(0)" : "translateX(-100%)"};
     display: flex;
     flex-direction: column;
     background: ${({ theme }) => theme.colors.main};
-    height: 100vh;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;

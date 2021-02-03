@@ -15,8 +15,8 @@ import { MenuItemStyled } from "../../components/menu/menuitem.styled";
 import { FaArrowRight, FaPlay } from "react-icons/fa";
 
 const ChapterContainer = styled.div`
-    overflow-x: hidden;
     overflow-y: auto;
+    overflow-x: hidden;
     height: 100%;
     margin: auto;
     position: relative;
@@ -38,7 +38,7 @@ const ChapterContainer = styled.div`
 
     // Large devices (desktops, 992px and up)
     @media (min-width: 992px) {
-        padding: 0 20%;
+        padding: 0 27%;
     }
 
     /* // Extra large devices (large desktops, 1200px and up)
@@ -71,9 +71,8 @@ const ChapterVideo = ({ url }) => {
                     setIsPlaying(true);
                 }}
                 onPause={() => setIsPlaying(false)}
-            >
-                <source src={url} type='video/mp4' />
-            </video>
+                src={url}
+            />
             {isPlaying == false && (
                 <PlayIcon>
                     <FaPlay />
@@ -108,7 +107,6 @@ const NextIcon = styled.div`
 
 export default function Chapter({ chapterData, allChaptersData }) {
     const [open, setOpen] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
     const currentIndex = allChaptersData.findIndex(
         (data) => data.id == chapterData.id
     );
@@ -147,7 +145,9 @@ export default function Chapter({ chapterData, allChaptersData }) {
                             >
                                 <MenuItemStyled
                                     active={chapter.id == chapterData.id}
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => {
+                                        setOpen(false);
+                                    }}
                                 >
                                     {chapter.id.replace("-", " ")}
                                 </MenuItemStyled>
@@ -156,7 +156,7 @@ export default function Chapter({ chapterData, allChaptersData }) {
                     })}
                 </Menu>
             </div>
-            <ChapterContainer>
+            <ChapterContainer onLoad={(e) => e.currentTarget.scrollTo(0, 0)}>
                 {urlHtml}
                 {url2Html}
                 {hasNext && (
