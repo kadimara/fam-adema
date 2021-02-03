@@ -1,3 +1,3 @@
 ---
-url: '/comic/cover.png'
+url: "/comic/cover.png"
 ---

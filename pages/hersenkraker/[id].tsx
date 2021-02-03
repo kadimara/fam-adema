@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Burger } from "../../components/burger/burger";
 import { Menu } from "../../components/menu/menu";
@@ -49,9 +49,27 @@ const ChapterContainer = styled(motion.div)`
     } */
 `;
 
-const ChapterImage = styled.img`
+const ChapterImageStyled = styled.img`
     width: 100%;
 `;
+
+const ChapterImage = ({ setLoading, ...props }) => {
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    useEffect(() => {
+        if (imgRef.current?.complete) {
+            setLoading(false);
+        }
+    }, []);
+
+    return (
+        <ChapterImageStyled
+            ref={imgRef}
+            onLoad={() => setLoading(false)}
+            {...props}
+        />
+    );
+};
 
 const ChapterVideoStyled = styled.div`
     position: relative;
@@ -65,7 +83,6 @@ const ChapterVideoStyled = styled.div`
 
 const ChapterVideo = ({ url }) => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
     return (
         <ChapterVideoStyled>
             <video
@@ -117,27 +134,9 @@ export default function Chapter({ chapterData, allChaptersData }) {
     const hasNext = currentIndex < allChaptersData.length - 1;
     const nextIndex = currentIndex + 1;
 
-    let urlHtml = (
-        <ChapterImage src={chapterData.url} onLoad={() => setLoading(false)} />
-    );
     const hasUrlVideo = chapterData.url.includes(".mp4");
-    if (hasUrlVideo) {
-        urlHtml = <ChapterVideo url={chapterData.url} />;
-    }
-
-    let url2Html = null;
-    if (chapterData.url2) {
-        url2Html = (
-            <ChapterImage
-                src={chapterData.url2}
-                onLoad={() => setLoading(false)}
-            />
-        );
-        const hasUrl2Video = chapterData.url2.includes(".mp4");
-        if (hasUrl2Video) {
-            url2Html = <ChapterVideo url={chapterData.url2} />;
-        }
-    }
+    const hasUrl2 = chapterData.url2;
+    const hasUrl2Video = hasUrl2 && chapterData.url2.includes(".mp4");
 
     return (
         <ThemeProvider theme={ComicTheme}>
@@ -171,8 +170,22 @@ export default function Chapter({ chapterData, allChaptersData }) {
                 animate={loading == false && { opacity: 1 }}
                 transition={{ duration: 0.5 }}
             >
-                {urlHtml}
-                {url2Html}
+                {hasUrlVideo ? (
+                    <ChapterVideo url={chapterData.url} />
+                ) : (
+                    <ChapterImage
+                        src={chapterData.url}
+                        setLoading={setLoading}
+                    />
+                )}
+                {hasUrl2 && hasUrl2Video ? (
+                    <ChapterVideo url={chapterData.url2} />
+                ) : (
+                    <ChapterImage
+                        src={chapterData.url2}
+                        setLoading={setLoading}
+                    />
+                )}
                 {hasNext && (
                     <Link
                         href={"/hersenkraker/" + allChaptersData[nextIndex].id}
