@@ -65,6 +65,7 @@ const ChapterVideoStyled = styled.div`
 
 const ChapterVideo = ({ url }) => {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     return (
         <ChapterVideoStyled>
             <video
@@ -109,13 +110,16 @@ const NextIcon = styled.div`
 
 export default function Chapter({ chapterData, allChaptersData }) {
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
     const currentIndex = allChaptersData.findIndex(
         (data) => data.id == chapterData.id
     );
     const hasNext = currentIndex < allChaptersData.length - 1;
     const nextIndex = currentIndex + 1;
 
-    let urlHtml = <ChapterImage src={chapterData.url} />;
+    let urlHtml = (
+        <ChapterImage src={chapterData.url} onLoad={() => setLoading(false)} />
+    );
     const hasUrlVideo = chapterData.url.includes(".mp4");
     if (hasUrlVideo) {
         urlHtml = <ChapterVideo url={chapterData.url} />;
@@ -123,7 +127,12 @@ export default function Chapter({ chapterData, allChaptersData }) {
 
     let url2Html = null;
     if (chapterData.url2) {
-        url2Html = <ChapterImage src={chapterData.url2} />;
+        url2Html = (
+            <ChapterImage
+                src={chapterData.url2}
+                onLoad={() => setLoading(true)}
+            />
+        );
         const hasUrl2Video = chapterData.url2.includes(".mp4");
         if (hasUrl2Video) {
             url2Html = <ChapterVideo url={chapterData.url2} />;
@@ -159,7 +168,7 @@ export default function Chapter({ chapterData, allChaptersData }) {
                 </Menu>
             </div>
             <ChapterContainer
-                animate={{ opacity: 1 }}
+                animate={loading == false && { opacity: 1 }}
                 transition={{ duration: 0.5 }}
             >
                 {urlHtml}
