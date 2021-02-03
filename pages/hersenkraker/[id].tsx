@@ -130,7 +130,7 @@ export default function Chapter({ chapterData, allChaptersData }) {
         url2Html = (
             <ChapterImage
                 src={chapterData.url2}
-                onLoad={() => setLoading(true)}
+                onLoad={() => setLoading(false)}
             />
         );
         const hasUrl2Video = chapterData.url2.includes(".mp4");
