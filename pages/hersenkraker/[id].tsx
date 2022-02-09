@@ -1,19 +1,19 @@
-import Head from "next/head";
-import { useEffect, useRef, useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import { Burger } from "../../components/burger/burger";
-import { Menu } from "../../components/menu/menu";
-import { GlobalStyles } from "../../styles/global";
+import Head from 'next/head';
+import { useEffect, useRef, useState } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import { Burger } from '../../components/burger/burger';
+import { Menu } from '../../components/menu/menu';
+import { GlobalStyles } from '../../styles/global';
 import {
     getAllChapterIds,
     getAllChaptersData,
     getChapterData,
-} from "../../lib/comic/chapters";
-import Link from "next/link";
-import { ComicTheme } from "../../styles/comic-theme";
-import { MenuItemStyled } from "../../components/menu/menuitem.styled";
-import { FaArrowRight, FaPlay } from "react-icons/fa";
-import { motion } from "framer-motion";
+} from '../../lib/comic/chapters';
+import Link from 'next/link';
+import { ComicTheme } from '../../styles/comic-theme';
+import { MenuItemStyled } from '../../components/menu/menuitem.styled';
+import { FaArrowRight, FaPlay } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const ChapterContainer = styled(motion.div)`
     opacity: 0;
@@ -73,8 +73,7 @@ const ChapterImage = ({ setLoading, ...props }) => {
 
 const ChapterVideoStyled = styled.div`
     position: relative;
-    width: 101%;
-    cursor: pointer;
+    width: 100%;
 
     & > video {
         width: 100%;
@@ -84,7 +83,9 @@ const ChapterVideoStyled = styled.div`
 const ChapterVideo = ({ url }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     return (
-        <ChapterVideoStyled>
+        <ChapterVideoStyled
+            style={isPlaying ? { cursor: 'none' } : { cursor: 'pointer' }}
+        >
             <video
                 onClick={(event) => {
                     event.currentTarget.play();
@@ -93,7 +94,7 @@ const ChapterVideo = ({ url }) => {
                 onPause={() => setIsPlaying(false)}
                 src={url}
             />
-            {isPlaying == false && (
+            {!isPlaying && (
                 <PlayIcon>
                     <FaPlay />
                 </PlayIcon>
@@ -134,9 +135,9 @@ export default function Chapter({ chapterData, allChaptersData }) {
     const hasNext = currentIndex < allChaptersData.length - 1;
     const nextIndex = currentIndex + 1;
 
-    const hasUrlVideo = chapterData.url.includes(".mp4");
+    const hasUrlVideo = chapterData.url.includes('.mp4');
     const hasUrl2 = chapterData.url2;
-    const hasUrl2Video = hasUrl2 && chapterData.url2.includes(".mp4");
+    const hasUrl2Video = hasUrl2 && chapterData.url2.includes('.mp4');
 
     return (
         <ThemeProvider theme={ComicTheme}>
@@ -151,7 +152,7 @@ export default function Chapter({ chapterData, allChaptersData }) {
                         return (
                             <Link
                                 key={chapter.id}
-                                href={"/hersenkraker/" + chapter.id}
+                                href={'/hersenkraker/' + chapter.id}
                             >
                                 <MenuItemStyled
                                     active={chapter.id == chapterData.id}
@@ -159,7 +160,7 @@ export default function Chapter({ chapterData, allChaptersData }) {
                                         setOpen(false);
                                     }}
                                 >
-                                    {chapter.id.replace("-", " ")}
+                                    {chapter.id.replace('-', ' ')}
                                 </MenuItemStyled>
                             </Link>
                         );
@@ -188,7 +189,7 @@ export default function Chapter({ chapterData, allChaptersData }) {
                 )}
                 {hasNext && (
                     <Link
-                        href={"/hersenkraker/" + allChaptersData[nextIndex].id}
+                        href={'/hersenkraker/' + allChaptersData[nextIndex].id}
                         replace={true}
                     >
                         <NextIcon>
