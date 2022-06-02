@@ -113,20 +113,20 @@ export default function SignInPage() {
                     </div>
                     <div>
                         <FormInput
-                            type="password"
+                            type='password'
                             ref={passwordInput}
-                            placeholder="Password"
+                            placeholder='Password'
                         />
                     </div>
                     <div>
-                        <SubmitButton type="submit">Login</SubmitButton>
+                        <SubmitButton type='submit'>Login</SubmitButton>
                     </div>
                     <div>
-                        Weet je het wachtwoord niet?
+                        Alex weet het niet meer.
                         <br />
                         Je kunt altijd deze strip nog lezen:
                     </div>
-                    <Link href="/hersenkraker">
+                    <Link href='/hersenkraker'>
                         <LinkStyled>
                             <FaReadme />
                             &nbsp;Hersenkraker
