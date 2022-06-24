@@ -28,7 +28,7 @@ export default function Home() {
       </Head>
       <Container varient="center">
         <GlobalStyles />
-        <h1>Hallo, Jasper!</h1>
+        <h1>Hallo, Jasper! Dit is een wijziging :D</h1>
       </Container>
       <div>
         <Burger open={open} setOpen={setOpen} />
